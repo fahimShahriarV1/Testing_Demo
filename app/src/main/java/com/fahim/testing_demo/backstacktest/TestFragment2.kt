@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import com.fahim.testing_demo.R
+import com.fahim.testing_demo.databinding.FragmentTest2Binding
 import androidx.navigation.fragment.findNavController
 import com.fahim.base.BaseFragment
-import com.fahim.testing_demo.R
-import com.fahim.testing_demo.databinding.FragmentTestBinding
 
-class TestFragment : BaseFragment() {
-    private lateinit var binding: FragmentTestBinding
+class TestFragment2 : BaseFragment() {
+    private lateinit var binding: FragmentTest2Binding
     private var serial = 1
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,13 +28,20 @@ class TestFragment : BaseFragment() {
 
         }
         setTitleAndSubTitle("Fragment $serial","Fragment $serial")
-        setActionAndStatusBarColor(Color.BLUE)
-        binding = FragmentTestBinding.inflate(layoutInflater)
+        setActionAndStatusBarColor(Color.WHITE)
+        setActionBarVisibility(true)
+        binding = FragmentTest2Binding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+/*        val ad = childFragmentManager.backStackEntryCount
+        Toast.makeText(requireContext(), "Size now $ad", Toast.LENGTH_SHORT).show()
+        val list = mutableListOf<Int>()
+        for (i in 1..ad) {
+            list.add(i)
+        }*/
         var ad = parentFragmentManager.backStackEntryCount
         Toast.makeText(requireContext(), "Size now $ad", Toast.LENGTH_SHORT).show()
         val list = mutableListOf<Int>()
@@ -45,8 +52,9 @@ class TestFragment : BaseFragment() {
         }
         binding.rcStacks.adapter = Adapter(list.asReversed())
 
+
         binding.buttonNext.setOnClickListener {
-            findNavController().navigate(R.id.go_next, bundleOf(ARG_PREVIOUS to serial))
+            findNavController().navigate(R.id.go_next2, bundleOf(ARG_PREVIOUS to serial))
         }
 
         binding.buttonBack.setOnClickListener {

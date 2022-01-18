@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/testFragment">
+
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.fahim.testing_demo.backstacktest.TestFragment"
+        tools:layout="@layout/fragment_test">
+        <argument
+            android:name="ARG_PREVIOUS"
+            app:argType="integer" />
+        <action
+            android:id="@+id/go_next"
+            app:destination="@+id/testFragment2"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/testFragment2"
+        android:name="com.fahim.testing_demo.backstacktest.TestFragment2"
+        tools:layout="@layout/fragment_test2">
+        <argument
+            android:name="ARG_PREVIOUS"
+            app:argType="integer" />
+        <action
+            android:id="@+id/go_next2"
+            app:destination="@+id/testFragment3" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/testFragment3"
+        android:name="com.fahim.testing_demo.backstacktest.TestFragment3"
+        tools:layout="@layout/fragment_test3">
+        <argument
+            android:name="ARG_PREVIOUS"
+            app:argType="integer" />
+        <action
+            android:id="@+id/go_next3"
+            app:destination="@+id/testFragment2" />
+    </fragment>
 
 </navigation>
