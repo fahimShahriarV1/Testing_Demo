@@ -46,7 +46,7 @@ class TestFragment : BaseFragment() {
         binding.rcStacks.adapter = Adapter(list.asReversed())
 
         binding.buttonNext.setOnClickListener {
-            findNavController().navigate(R.id.go_next, bundleOf(ARG_PREVIOUS to serial))
+            findNavController().navigate(R.id.action_testFragment_to_qr)
         }
 
         binding.buttonBack.setOnClickListener {

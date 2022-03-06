@@ -15,6 +15,9 @@
         <action
             android:id="@+id/go_next"
             app:destination="@+id/testFragment2"/>
+        <action
+            android:id="@+id/action_testFragment_to_qr"
+            app:destination="@id/qr" />
     </fragment>
 
     <fragment
@@ -40,5 +43,10 @@
             android:id="@+id/go_next3"
             app:destination="@+id/testFragment2" />
     </fragment>
+
+    <fragment
+        android:id="@+id/qr"
+        android:name="com.fahim.testing_demo.backstacktest.QrScan"
+        tools:layout="@layout/fragment_qr_scan"/>
 
 </navigation>
