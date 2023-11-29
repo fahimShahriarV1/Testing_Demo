@@ -22,7 +22,7 @@ import java.io.IOException
 
 class QrScan : Fragment() {
     private val requestCodeCameraPermission = 1001
-    private lateinit var binding: FragmentQrScanBinding
+    private lateinit var bindingView: FragmentQrScanBinding
     private lateinit var cameraSource: CameraSource
     private lateinit var barcodeDetector: BarcodeDetector
     private var scannedValue = ""
@@ -32,8 +32,8 @@ class QrScan : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentQrScanBinding.inflate(layoutInflater)
-        return binding.root
+        bindingView = FragmentQrScanBinding.inflate(layoutInflater)
+        return bindingView.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ class QrScan : Fragment() {
                 requireContext(), Manifest.permission.CAMERA
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            askForCameraPermission()
+            askRequiredPermission()
         } else {
             setupControls()
         }
@@ -67,7 +67,7 @@ class QrScan : Fragment() {
             .setAutoFocusEnabled(true) //you should add this feature
             .build()
 
-        binding.surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
+        bindingView.surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
             @SuppressLint("MissingPermission")
             override fun surfaceCreated(holder: SurfaceHolder) {
                 try {
@@ -108,7 +108,7 @@ class QrScan : Fragment() {
 
             override fun receiveDetections(detections: Detector.Detections<Barcode>) {
                 val barcodes = detections.detectedItems
-                if (barcodes.size() == 1) {
+                if (barcodes.size() > 0) {
                     scannedValue = barcodes.valueAt(0).rawValue
 
                     (activity as AppCompatActivity).runOnUiThread {
@@ -120,7 +120,7 @@ class QrScan : Fragment() {
         })
     }
 
-    private fun askForCameraPermission() {
+    private fun askRequiredPermission() {
         ActivityCompat.requestPermissions(
             (activity as AppCompatActivity),
             arrayOf(Manifest.permission.CAMERA),
